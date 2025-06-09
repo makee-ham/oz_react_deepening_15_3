@@ -11,10 +11,13 @@ export const useBoardStore = create(
         set((state) => ({
           data: state.data.map((item) => (item.id === updatedBoard.id ? updatedBoard : item)),
         })),
+      updateBoardType: (id, newType) =>
+        set((state) => ({ data: state.data.map((item) => (item.id === id ? { ...item, type: newType } : item)) })),
+      reorderItems: (newData) => set({ data: newData }),
     }),
     {
       name: 'board-storage',
       storage: createJSONStorage(() => localStorage),
-    }
-  )
+    },
+  ),
 );
